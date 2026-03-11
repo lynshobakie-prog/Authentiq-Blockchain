@@ -1,1 +1,32 @@
+/* استدعاء خط Cabinet Grotesk بجميع أوزانه */
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,900,700,400&display=swap');
+
+:root {
+  --font-cabinet: 'Cabinet Grotesk', sans-serif;
+}
+
+body {
+  font-family: var(--font-cabinet);
+  -webkit-font-smoothing: antialiased;
+}@import url('https://api.fontshare.com/v2/css?f[]=clash-display@200,400,700,900&display=swap');
 @import "tailwindcss";
+
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(30px, -50px) scale(1.1); }
+  66% { transform: translate(-20px, 20px) scale(0.9); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+@keyframes grid-flow {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(50px); }
+}
+
+.animate-blob {
+  animation: blob 15-s infinite alternate;
+}
+
+.animate-grid-flow {
+  animation: grid-flow 3s linear infinite;
+}

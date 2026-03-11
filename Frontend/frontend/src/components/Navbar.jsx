@@ -1,69 +1,90 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import { ShieldCheck, ChevronDown, UserPlus, Menu, X } from 'lucide-react';
+import { ShieldCheck, ChevronDown, Menu, X, LogIn } from 'lucide-react';
 
-const Navbar = () => {
+const Navbar = ({ 
+  onHomeClick, 
+  onCategoriesClick, 
+  onJoinUsClick, 
+  onSignInClick, 
+  onProcessClick, 
+  onVisionClick 
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const cabinetStyle = { fontFamily: "'Cabinet Grotesk', sans-serif" };
+
   return (
-    <nav className="fixed top-0 w-full bg-[#0a0a0a]/80 backdrop-blur-md border-b border-white/5 z-[100]">
+    <nav className="fixed top-0 w-full bg-[#0f1115]/90 backdrop-blur-md border-b border-white/5 z-[100]" style={cabinetStyle}>
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
-        {/* 1. اللوجو (يسار) - تصغير الحجم قليلًا */}
-        <div className="flex items-center gap-2 cursor-pointer group">
-          <div className="bg-blue-600 p-1.5 rounded-lg group-hover:rotate-6 transition-transform duration-300">
+        {/* 1. اللوجو - مضغوط وقوي */}
+        <div onClick={onHomeClick} className="flex items-center gap-2 cursor-pointer group">
+          <div className="bg-blue-600 p-1.5 rounded-lg group-hover:rotate-3 transition-transform duration-300">
             <ShieldCheck className="text-white" size={20} />
           </div>
-          <span className="text-lg font-bold tracking-tighter text-white uppercase">Authentiq</span>
+          <span className="text-2xl font-[900] text-white uppercase tracking-tighter italic">
+            Authentiq
+          </span>
         </div>
 
-        {/* 2. الروابط (المنتصف) - خط أصغر ومسافات أضيق */}
-        <div className="hidden md:flex items-center gap-8 text-[11px] font-bold text-gray-400 uppercase tracking-[0.15em]">
-          <a href="#home" className="hover:text-white transition-colors">Home</a>
+        {/* 2. الروابط المركزية - Compact Style */}
+        <div className="hidden md:flex items-center gap-8 text-[14px] font-[900] text-gray-400 uppercase">
+          
+          <button onClick={onHomeClick} className="hover:text-white transition-all duration-300 relative group">
+            HOME
+            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
           
           <div 
             className="relative group py-5"
             onMouseEnter={() => setIsDropdownOpen(true)}
             onMouseLeave={() => setIsDropdownOpen(false)}
           >
-            <button className="flex items-center gap-1 hover:text-white transition-colors outline-none">
-              Categories <ChevronDown size={12} className={`transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`} />
+            <button onClick={onCategoriesClick} className="flex items-center gap-0.5 hover:text-white transition-all duration-300 outline-none">
+              VERIFY <ChevronDown size={14} className={`transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} />
             </button>
-
+            
             {isDropdownOpen && (
-              <div className="absolute top-[85%] left-0 w-48 bg-[#111] border border-white/10 rounded-xl shadow-xl p-1.5 animate-in fade-in zoom-in-95">
-                <a href="#uni" className="block px-3 py-2 hover:bg-white/5 rounded-lg text-[11px] text-gray-400 hover:text-blue-400 uppercase tracking-widest">University</a>
-                <a href="#course" className="block px-3 py-2 hover:bg-white/5 rounded-lg text-[11px] text-gray-400 hover:text-emerald-400 uppercase tracking-widest">Courses</a>
+              <div className="absolute top-[80%] left-0 w-44 bg-[#111] border border-white/10 rounded-lg shadow-2xl p-1 animate-in fade-in zoom-in-95">
+                <button onClick={onCategoriesClick} className="w-full text-left px-4 py-2 hover:bg-white/5 rounded text-[11px] text-gray-400 hover:text-blue-400 font-[900] uppercase">UNIVERSITY</button>
+                <button onClick={onCategoriesClick} className="w-full text-left px-4 py-2 hover:bg-white/5 rounded text-[11px] text-gray-400 hover:text-emerald-400 font-[900] uppercase">COURSES</button>
               </div>
             )}
           </div>
 
-          <a href="#about" className="hover:text-white transition-colors">About</a>
-          <a href="#security" className="hover:text-white transition-colors">Security</a>
+          {/* التعديل هنا: حولنا الـ <a> لـ <button> وربطناه بـ onProcessClick */}
+          <button onClick={onProcessClick} className="hover:text-white transition-all duration-300 relative group text-gray-400">
+            PROCESS
+            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
+
+          <button onClick={onJoinUsClick} className="text-blue-500 hover:text-blue-400 transition-all duration-300 font-[900]">
+            JOIN US
+          </button>
+
+          {/* التعديل هنا: ربطناه بـ onVisionClick */}
+          <button onClick={onVisionClick} className="hover:text-white transition-all duration-300 relative group uppercase">
+            VISION
+            <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+          </button>
         </div>
 
-        {/* 3. زر الحساب (يمين) - شكل أنعم */}
+        {/* 3. زر Sign In */}
         <div className="hidden md:block">
-          <button className="border border-white/10 text-white px-5 py-2 rounded-full font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 hover:bg-white hover:text-black transition-all active:scale-95">
-            <UserPlus size={14} />
-            Join Us
+          <button onClick={onSignInClick} className="bg-white text-black px-6 py-2 rounded-full font-[900] text-[12px] uppercase flex items-center gap-2 hover:bg-blue-600 hover:text-white transition-all active:scale-95 shadow-lg shadow-white/5">
+            <LogIn size={14} />
+            SIGN IN
           </button>
         </div>
 
         {/* زر الموبايل */}
         <button className="md:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
-
-      {/* قائمة الموبايل (نحيفة أيضاً) */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-[#0a0a0a] border-b border-white/5 p-4 flex flex-col gap-3">
-          <a href="#home" className="text-gray-400 font-bold uppercase tracking-widest text-[11px]">Home</a>
-          <a href="#categories" className="text-gray-400 font-bold uppercase tracking-widest text-[11px]">Categories</a>
-          <button className="bg-blue-600 text-white py-2 rounded-lg font-bold uppercase tracking-widest text-[11px] mt-2">Join Us</button>
-        </div>
-      )}
+      
     </nav>
   );
 };

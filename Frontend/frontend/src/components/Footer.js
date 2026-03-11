@@ -1,71 +1,77 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-// أزلنا Github من هنا لأنه غير مستخدم، وأبقينا ما تحتاجه الأيقونات الأخرى
-import { Twitter, Linkedin, Mail, Shield } from 'lucide-react';
+import { Twitter, Linkedin, Mail, ShieldCheck } from 'lucide-react';
 
 const Footer = () => {
+  // ستايل الخط الموحد
+  const cabinetStyle = { fontFamily: "'Cabinet Grotesk', sans-serif" };
+
   return (
-    <footer className="relative mt-20 border-t border-white/5 bg-[#0a0a0a] py-12 overflow-hidden">
-      {/* إضاءة خلفية خفيفة جداً للفوتر */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
+    <footer className="relative mt-20 border-t border-white/5 bg-[#0f1115] py-16 overflow-hidden" style={cabinetStyle}>
+      {/* خط الإضاءة العلوي الرقيق */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent" />
       
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           
-          {/* العمود الأول: اللوجو */}
+          {/* العمود الأول: اللوجو المحدث */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-6">
-              <Shield className="text-blue-500" size={24} />
-              <span className="text-xl font-black tracking-tighter text-white">AUTHENTIQ.</span>
+              <div className="bg-blue-600 p-1 rounded-md">
+                <ShieldCheck className="text-white" size={20} />
+              </div>
+              <span className="text-xl font-[900] tracking-tighter text-white uppercase italic">
+                AUTHENTIQ
+              </span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Securing the future of academic achievements through blockchain technology.
+            <p className="text-gray-500 text-[12px] font-[700] leading-relaxed uppercase">
+              Securing the future of academic achievements through blockchain innovation.
             </p>
           </div>
 
-          {/* العمود الثاني: روابط سريعة */}
+          {/* العمود الثاني: روابط المنصة - Uppercase & Compact */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Platform</h4>
-            <ul className="space-y-4 text-gray-500 text-sm">
-              <li><a href="#" className="hover:text-blue-400 transition-colors">How it works</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Verification</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Institutions</a></li>
+            <h4 className="text-white font-[900] mb-6 text-[13px] uppercase">Platform</h4>
+            <ul className="space-y-4 text-gray-500 text-[12px] font-[700] uppercase">
+              <li><a href="#" className="hover:text-blue-400 transition-colors tracking-tight">How it works</a></li>
+              <li><a href="#" className="hover:text-blue-400 transition-colors tracking-tight">Verification</a></li>
+              <li><a href="#" className="hover:text-blue-400 transition-colors tracking-tight">Institutions</a></li>
             </ul>
           </div>
 
           {/* العمود الثالث: الشركة */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Company</h4>
-            <ul className="space-y-4 text-gray-500 text-sm">
-              <li><a href="#" className="hover:text-blue-400 transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a></li>
+            <h4 className="text-white font-[900] mb-6 text-[13px] uppercase">Company</h4>
+            <ul className="space-y-4 text-gray-500 text-[12px] font-[700] uppercase">
+              <li><a href="#" className="hover:text-blue-400 transition-colors tracking-tight">About Us</a></li>
+              <li><a href="#" className="hover:text-blue-400 transition-colors tracking-tight">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-blue-400 transition-colors tracking-tight">Terms of Service</a></li>
             </ul>
           </div>
 
           {/* العمود الرابع: التواصل الاجتماعي */}
           <div>
-            <h4 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Connect</h4>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-500/20 hover:text-blue-400 transition-all">
-                <Twitter size={18} />
+            <h4 className="text-white font-[900] mb-6 text-[13px] uppercase">Connect</h4>
+            <div className="flex gap-3">
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300">
+                <Twitter size={16} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-500/20 hover:text-blue-400 transition-all">
-                <Linkedin size={18} />
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300">
+                <Linkedin size={16} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-blue-500/20 hover:text-blue-400 transition-all">
-                <Mail size={18} />
+              <a href="#" className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center hover:bg-blue-600 hover:text-white transition-all duration-300">
+                <Mail size={16} />
               </a>
             </div>
           </div>
         </div>
 
         {/* الحقوق السفلية */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:row justify-between items-center gap-4">
-          <p className="text-gray-600 text-xs">
-            © {new Date().getFullYear()} Authentiq Blockchain Ecosystem. All rights reserved.
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-600 text-[10px] font-[900] uppercase">
+            © {new Date().getFullYear()} Authentiq Blockchain Ecosystem.
           </p>
-          <div className="flex gap-8 text-gray-600 text-xs font-medium">
+          <div className="flex gap-8 text-gray-600 text-[10px] font-[900] uppercase">
             <a href="#" className="hover:text-white transition-colors">Status</a>
             <a href="#" className="hover:text-white transition-colors">Security</a>
           </div>
