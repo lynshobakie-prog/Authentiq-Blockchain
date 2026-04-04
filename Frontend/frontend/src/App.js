@@ -6,6 +6,7 @@ import Categories from './components/Categories';
 import AdminDashboard from './components/AdminDashboard';
 import Process from './components/Process';
 import Vision from './components/Vision';
+import VerifyForm from './components/VerifyForm';
 import { 
   ShieldCheck, Search, ArrowRight, CheckCircle2, 
   X, Lock, Mail, GraduationCap, Award 
@@ -245,12 +246,29 @@ function App() {
 
           {/* --- Verification Views --- */}
           {view === 'verify-main' && (
-            <div className="animate-in slide-in-from-bottom-10 duration-700">
-              <Categories onSelectUniversity={() => setView('verify-university')} onSelectCourse={() => setView('verify-course')} />
-            </div>
-          )}
-          {view === 'verify-university' && <PlaceholderView title="University Verify Form" />}
-          {view === 'verify-course' && <PlaceholderView title="Course Verify Form" />}
+  <div className="animate-in slide-in-from-bottom-10 duration-700">
+    <Categories 
+      onSelect={(id) => {
+        if (id === 'university') setView('verify-university');
+        else setView('verify-course');
+      }} 
+    />
+  </div>
+)}
+          {view === 'verify-university' && (
+  <VerifyForm 
+    title="University Degree Verification" 
+    type="university" 
+    onBack={() => setView('verify-main')} 
+  />
+)}
+         {view === 'verify-course' && (
+  <VerifyForm 
+    title="Professional Certificate Verification" 
+    type="course" 
+    onBack={() => setView('verify-main')} 
+  />
+)}
           
           {/* --- Admin Dashboard --- */}
           {view === 'admin-dashboard' && (

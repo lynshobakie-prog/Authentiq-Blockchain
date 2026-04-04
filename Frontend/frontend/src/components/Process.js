@@ -1,112 +1,127 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, Lock, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Cpu, ShieldCheck, Database } from 'lucide-react';
 
-const Process = ({ onNext }) => {
+const ProcessTimeline = () => {
   const steps = [
     {
-      image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?q=80&w=2832&auto=format&fit=crop",
-      icon: <ShieldCheck size={24} className="text-blue-600" />,
-      title: "Secure Your Identity",
-      desc: "We turn your hard work into a unique digital fingerprint. It's a DNA-proof for your certificate that no one can copy.",
-      side: "right"
+      icon: <Cpu size={32} />,
+      title: "Data Submission",
+      desc: "User enters the unique certificate hash into our secure gateway for initial structure validation."
     },
     {
-      image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop",
-      icon: <Lock size={24} className="text-emerald-600" />,
-      title: "Freeze in Time",
-      desc: "Your records are locked into a global blockchain vault. They are permanent, safe, and impossible to change.",
-      side: "left"
+      icon: <Database size={32} />,
+      title: "Database Sync",
+      desc: "System cross-references the hash with decentralized storage nodes to locate the original record."
     },
     {
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2940&auto=format&fit=crop",
-      icon: <Zap size={24} className="text-purple-600" />,
-      title: "Instant Trust",
-      desc: "Share your success with the world. Employers can verify your skills in one click with zero paperwork.",
-      side: "right"
+      icon: <ShieldCheck size={32} />,
+      title: "Final Verification",
+      desc: "Digital signatures are verified, and a real-time authenticity report is generated for the user."
     }
   ];
 
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+    }
+  };
+
   return (
-    <section className="relative min-h-screen py-32 px-6 bg-[#f0f4f8] overflow-hidden">
+    <div className="relative min-h-screen pt-32 pb-20 px-6 bg-[#04060a] overflow-hidden text-white font-sans">
       
-      {/* 🌐 التقنية الخلفية اللي حبيناها */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(#3b82f6 0.5px, transparent 0.5px)', backgroundSize: '40px 40px' }} />
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
+      {/* 🎬 فيديو الكوكب الرقمي (المسار المعدل والأنمن) */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="w-full h-full object-cover opacity-35" // زدت التعتيم شوي عشان التوهج يبرز أكتر
+        >
+          {/* ✅ التعديل هنا لضمان قراءة الملف من الـ public */}
+          <source src={process.env.PUBLIC_URL + '/process-bg.mp4'} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         
-        {/* Header الجريء */}
-        <div className="text-center mb-32">
-          <span className="text-blue-600 font-black tracking-[0.3em] text-[10px] uppercase block mb-4">How It Works</span>
-          <h2 className="text-6xl md:text-8xl font-[900] text-[#1a1f2e] uppercase tracking-tighter italic">
-            Pure <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-emerald-600 not-italic">Protocol.</span>
+        <div className="absolute inset-0 bg-[#04060a]/60" /> {/* طبقة دمج أقوى */}
+      </div>
+
+      <div className="relative z-10 max-w-5xl mx-auto">
+        
+        {/* عنوان الصفحة مع موشن ظهور */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-32 text-center"
+        >
+          <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter italic">
+            How it <span className="text-blue-500 drop-shadow-[0_0_20px_#2563eb]">Works</span>
           </h2>
-        </div>
+          <div className="h-1.5 w-24 bg-blue-600 mx-auto mt-6 rounded-full shadow-[0_0_15px_#2563eb]" />
+        </motion.div>
 
-        {/* Steps - الـ Zig-Zag اللي حبيناه */}
-        <div className="space-y-40 relative">
-          {/* الخط الواصل بين الصور */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-blue-100 -translate-x-1/2 hidden md:block" />
+        <div className="relative">
+          
+          {/* الخط المركزي النيوني المتحرك */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-[1.5px] h-full bg-blue-500/10 hidden md:block overflow-hidden">
+            <motion.div 
+              className="w-full bg-gradient-to-b from-transparent via-blue-500 to-transparent h-40"
+              animate={{ y: ['-100%', '400%'] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
+          </div>
 
-          {steps.map((step, index) => (
-            <div key={index} className={`flex flex-col md:flex-row items-center gap-16 md:gap-24 ${step.side === 'left' ? 'md:flex-row-reverse' : ''}`}>
-              
-              {/* النص - صار أوضح بكتير */}
-              <div className="flex-1 text-center md:text-left space-y-6">
-                <div className="flex items-center justify-center md:justify-start gap-4">
-                  <div className="w-12 h-12 bg-white rounded-2xl shadow-lg flex items-center justify-center border border-blue-50">
+          <div className="space-y-40">
+            {steps.map((step, index) => (
+              <motion.div 
+                key={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.3 }}
+                variants={itemVariants}
+                className={`flex flex-col md:flex-row items-center justify-between w-full ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}
+              >
+                
+                {/* كرت المحتوى - شفاف وأفخم */}
+                <div className="w-full md:w-[45%] group">
+                  <div 
+                    className={`p-10 bg-white/[0.03] border border-white/10 backdrop-blur-3xl transition-all duration-700 hover:border-blue-500/40 hover:bg-white/[0.06] shadow-xl
+                    ${index % 2 === 0 ? 'md:text-right text-center' : 'md:text-left text-center'}`}
+                    style={{ clipPath: 'polygon(0 0, 92% 0, 100% 12%, 100% 100%, 8% 100%, 0 88%)' }}
+                  >
+                    <h3 className="text-2xl md:text-3xl font-black text-white uppercase tracking-tight italic mb-6">
+                      {step.title}
+                    </h3>
+                    <p className="text-[14px] md:text-15px text-white/70 leading-relaxed font-normal tracking-wide drop-shadow-[0_2px_5px_rgba(0,0,0,0.5)]">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+
+                {/* الدائرة المركزية (Point) */}
+                <div className="relative z-10 my-12 md:my-0 flex items-center justify-center">
+                  <motion.div 
+                    whileHover={{ scale: 1.2, rotate: 180 }}
+                    className="w-20 h-20 rounded-full bg-[#0a0c12] border-2 border-blue-500/50 flex items-center justify-center text-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-500"
+                  >
                     {step.icon}
-                  </div>
-                  <span className="text-blue-600 font-black text-xs tracking-widest uppercase italic">Phase 0{index + 1}</span>
+                  </motion.div>
                 </div>
-                
-                <h3 className="text-4xl md:text-5xl font-black text-[#1a1f2e] uppercase italic leading-[0.9] tracking-tighter">
-                  {step.title}
-                </h3>
-                
-                <p className="text-slate-500 text-sm font-bold uppercase leading-relaxed tracking-wide max-w-sm mx-auto md:mx-0">
-                  {step.desc}
-                </p>
-              </div>
 
-              {/* الصورة - ببرواز مائل وحركة */}
-              <div className="flex-1 flex justify-center">
-                <div className="relative group w-full max-w-md">
-                  <div className="absolute inset-0 bg-blue-600 rounded-[3rem] rotate-3 opacity-10 group-hover:rotate-6 transition-transform duration-500" />
-                  
-                  <div className="relative aspect-square md:aspect-[4/3] overflow-hidden rounded-[3rem] border-4 border-white shadow-2xl transition-all duration-500 group-hover:-translate-y-4">
-                    <img 
-                      src={step.image} 
-                      alt={step.title} 
-                      className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1a1f2e]/60 to-transparent" />
-                  </div>
-                  
-                  {/* Label تقني */}
-                  <div className="absolute -bottom-4 right-4 bg-white px-6 py-3 rounded-2xl shadow-xl border border-blue-50 z-20">
-                     <span className="text-[10px] font-black text-blue-600 tracking-tighter uppercase italic">Verified_Node_0{index + 1}</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          ))}
-        </div>
-
-        {/* زر الانتقال النهائي */}
-        <div className="mt-40 text-center">
-          <button onClick={onNext} className="group relative inline-flex items-center gap-6 bg-[#1a1f2e] text-white px-14 py-6 rounded-full font-black uppercase text-[12px] tracking-[0.2em] overflow-hidden transition-all shadow-2xl">
-            <span className="relative z-10 italic flex items-center gap-3">
-              See the vision <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </span>
-            <div className="absolute inset-0 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-          </button>
+                <div className="hidden md:block w-[45%]" />
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default Process;
+export default ProcessTimeline;
