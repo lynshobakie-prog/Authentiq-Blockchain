@@ -7,6 +7,8 @@ module.exports = {
     extend: {
       fontFamily: {
         'clash': ['Clash Display', 'sans-serif'],
+        // إضافة السطر التالي لتعريف General Sans
+        'general': ['General Sans', 'sans-serif'],
       },
     },
   },

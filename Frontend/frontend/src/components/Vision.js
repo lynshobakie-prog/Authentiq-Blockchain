@@ -1,116 +1,148 @@
-import React, { useEffect } from 'react';
-// تأكدي من استيراد Globe و ShieldCheck و Cpu، وشيل الأيقونات القديمة
-import { ShieldCheck, Globe, Cpu } from 'lucide-react';
-// استيراد مكتبة AOS والـ CSS الخاص بها
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import React, { useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
+// ✅ تأكدي من الاسم الصحيح للملف عندك في المجلد
+import visionVideo from '../assets/videos/vision-bg.mp4.mp4'; 
+import { Eye, Target, ShieldCheck, Award, Zap, Globe } from 'lucide-react';
 
-const VisionPage = () => {
-  // تفعيل مكتبة الـ AOS عند تحميل الصفحة
+const Vision = () => {
+  const containerRef = useRef(null);
+  const videoRef = useRef(null);
+
+  // 1. ✅ كود لضمان تحميل الفيديو مسبقاً وتشغيله فوراً (No Delay)
   useEffect(() => {
-    AOS.init({
-      duration: 1000, // مدة الأنميشن (ثانية واحدة)
-      once: true,     // الأنميشن يشتغل مرة واحدة بس لما ننزل
-    });
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        // نلتقط الخطأ في حال حظر المتصفح الـ Autoplay
+        console.log("Autoplay blocked or video error:", error);
+      });
+    }
   }, []);
 
+  const visions = [
+    { 
+      icon: <Target className="text-cyan-400" size={40} />, 
+      title: "Our Mission", 
+      description: "To build a modern gateway for academic and professional trust, making verification simple, fast, and impossible to forge." 
+    },
+    { 
+      icon: <Eye className="text-emerald-400" size={40} />, 
+      title: "Our Vision", 
+      description: "A world where your digital identity is yours to keep, and your hard-earned success is always just one click away from being proven." 
+    }
+  ];
+
   return (
-    <div className="relative min-h-screen bg-[#06080d] overflow-hidden text-white font-sans">
+    <div ref={containerRef} className="relative w-full bg-[#06080d] text-white overflow-hidden">
       
-      {/* 🌌 سكشن الـ Hero (المعتمد) */}
-      <div className="relative h-[80vh] md:h-screen w-full flex items-center justify-center overflow-hidden border-b border-blue-950/30">
-        <div className="absolute inset-0 z-0">
-          <video autoPlay loop muted playsInline className="w-full h-full object-cover opacity-60">
-            <source src="/4745ed0eec38a43cea86f373a08d179e.mp4" type="video/mp4" />
+      {/* 🎥 Hero Section: الفيديو جاهز (Preloaded) وبوضوح عالي */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0"> 
+          <video 
+            ref={videoRef} // ✅ مرجع للفيديو للتحكم به برمجياً
+            autoPlay loop muted playsInline 
+            preload="auto" // ✅ تحميل مسبق للفيديو فوراً
+            className="w-full h-full object-cover"
+            style={{ 
+                // ✅ الحفاظ على وضوح الفيديو مع إخفاء الحواف السواد
+                transform: 'scale(1.05)', 
+                filter: 'brightness(0.5) contrast(1.1)', 
+                willChange: 'transform',
+                maskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 80%, transparent 100%)', 
+            }}>
+            <source src={visionVideo} type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#06080d]/40 via-transparent to-[#06080d]" />
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-[#06080d]/40 via-transparent to-[#06080d]" />
         </div>
-
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter italic leading-none mb-6">
-            Global <span className="text-blue-500 text-glow">Vision</span>
-          </h1>
-          <div className="max-w-3xl mx-auto">
-            <p className="text-lg md:text-2xl text-white/90 leading-relaxed font-bold italic tracking-tight drop-shadow-lg">
-              "We aren't just verifying documents; we are securing the integrity of human achievements across the digital horizon."
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* 🚀 القسم السفلي الجديد: "الاستراتيجية المرئية" (The Visual Strategy) */}
-      <div className="relative z-10 py-32 px-6">
         
-        {/* عنوان السكشن بستايل احترافي (مش ضخم) */}
-        <div className="max-w-7xl mx-auto mb-28 text-center" data-aos="fade-up">
-          <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter italic mb-4">
-            The Vision <span className="text-blue-500">Framework</span>
-          </h2>
-          <div className="h-1 w-20 bg-blue-600 mx-auto rounded-full" />
+        <div className="relative z-20 text-center px-4"> 
+          <motion.h1 
+            // 2. ✅ انيميشن سريع فورياً (No Delay)
+            initial={{ opacity: 0, y: 15 }} // مسافة صغيرة للوصول أسرع
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }} // وقت قصير للتحريك (0.6 بدل 1)
+            className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-tight drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
+          >
+            Defining <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-emerald-300 to-emerald-500">
+                Digital Integrity
+            </span>
+          </motion.h1>
+        </div>
+      </section>
+
+      {/* 🧩 Content Section: الحفاظ على شكل الشيفرة والتوهجات (whileInView) */}
+      <section className="relative z-10 py-32 px-6 max-w-6xl mx-auto flex flex-col items-center">
+        
+        {/* التوهجات الخلفية القوية والمشبعة (محفوظة) */}
+        <div className="absolute inset-0 pointer-events-none -z-10">
+          <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/40 rounded-full blur-[140px] animate-pulse" />
+          <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-emerald-500/40 rounded-full blur-[140px] animate-pulse" />
         </div>
 
-        {/* شبكة المعلومات المطورة (3 أعمدة، كل عمود فيه صورة، عنوان، وشرح) */}
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
-          
-          {[
-            { 
-              icon: <ShieldCheck className="text-blue-400" size={32} />, 
-              title: "Unbreachable Integrity", 
-              desc: "Every document becomes an unalterable cryptographic reality, protected by advanced hashing algorithms.",
-              // ✅ صورة توضيحية للأمان (الكرت الإلكتروني المقفل)
-              img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop" 
-            },
-            { 
-              icon: <Globe className="text-emerald-400" size={32} />, 
-              title: "Borderless Trust Network", 
-              desc: "Eliminating the need for middleman. We architect a decentralized world where verification is peer-to-peer, global, and instant.",
-              // ✅ صورة توضيحية للشبكة العالمية (كوكب رقمي)
-              img: "https://images.unsplash.com/photo-1581091215367-9b6c00b3035a?q=80&w=600&auto=format&fit=crop" 
-            },
-            { 
-              icon: <Cpu className="text-blue-500" size={32} />, 
-              title: "Instant Verification Engine", 
-              desc: "Reducing process time from weeks to seconds. Our core engine provides a fraud-proof digital handshake with intelligent Neural Technology.",
-              // ✅ صورة توضيحية للمعالجة (الذكاء الاصطناعي/الكمبيوتر)
-              img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop" 
-            }
-          ].map((pillar, index) => (
-            // ✅ هنا نضيف الأنميشنaos على كل كرت
-            <div 
-              key={index} 
-              className="p-10 border border-white/5 hover:border-blue-500/20 hover:bg-blue-600/5 transition-all duration-500 overflow-hidden"
-              style={{ clipPath: 'polygon(0 0, 92% 0, 100% 12%, 100% 100%, 8% 100%, 0 88%)' }}
-              // أنميشن السلايد لأعلى (Fade-in Up)
-              data-aos="fade-up" 
-              // تأخير بسيط لكل كرت عشان يظهروا واحد ورا التاني
-              data-aos-delay={index * 150} 
+        {/* 1. النص الأول (Intro) - محفوظ بالـ WhileInView */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }} // تضمن ظهور العنصر فوراً بمجرد الرؤية
+          transition={{ duration: 0.8 }}
+          className="text-center mb-32 max-w-4xl"
+        >
+          <h2 className="text-3xl md:text-4xl font-black uppercase italic mb-6 text-cyan-400">Empowering the Future</h2>
+          <p className="text-xl md:text-2xl font-light text-white/80 leading-relaxed italic">
+            "We believe that every achievement deserves a secure home and every skill should be instantly recognized, anywhere in the world."
+          </p>
+        </motion.div>
+
+        {/* 2. الكرتين الكبيرين (شكل الشيفرة الحاد) - محفوظ بالـ Map */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-40 w-full relative z-10">
+          {visions.map((item, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: index === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, delay: index * 0.2 }}
+              className="p-12 bg-[#0d111a]/60 border border-white/10 backdrop-blur-3xl group shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+              style={{ 
+                // ✅ شكل الشيفرة المقصوص
+                clipPath: 'polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%)' 
+              }}
             >
-              
-              {/* ✅ الصورة التوضيحية (بمقاس محدد وجميل) */}
-              <div className="mb-8 w-full h-48 overflow-hidden rounded-xl border border-white/5">
-                <img 
-                    src={pillar.img} 
-                    alt={pillar.title} 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                    // إذا الصورة مش واضحة تقدري تزيدي الـ filter لـ grayscale(1)
-                />
+              <div className="mb-8 p-4 bg-white/5 w-fit rounded-2xl group-hover:bg-cyan-500 group-hover:text-black transition-all duration-500 shadow-[0_0_30px_rgba(6,182,212,0.4)]">
+                {item.icon}
               </div>
-
-              {/* الأيقونة الصغيرة فوق العنوان */}
-              <div className="mb-4">{pillar.icon}</div>
-
-              {/* العنوان (حجم معقول وفخم) */}
-              <h3 className="text-2xl font-bold text-white uppercase italic mb-3 tracking-tight">{pillar.title}</h3>
-
-              {/* الشرح (نص واحد فرعي، بخط صغير وواضح) */}
-              <p className="text-sm text-white/50 leading-relaxed font-medium">{pillar.desc}</p>
-            </div>
+              <h3 className="text-3xl font-black uppercase italic mb-4 group-hover:text-cyan-400 tracking-tight transition-colors">{item.title}</h3>
+              <p className="text-white/60 text-lg leading-relaxed">{item.description}</p>
+            </motion.div>
           ))}
-
         </div>
-      </div>
+
+        {/* 3. كروت القيم الصغيرة (محفوظة) */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full relative z-10">
+          {[
+            { label: "Global Trust", icon: <ShieldCheck size={22} /> },
+            { label: "Instant Verity", icon: <Zap size={22} /> },
+            { label: "Security", icon: <Award size={22} /> },
+            { label: "Worldwide", icon: <Globe size={22} /> }
+          ].map((stat, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              whileHover={{ scale: 1.05, y: -5 }}
+              className="flex flex-col items-center p-6 bg-white/[0.04] border border-white/5 backdrop-blur-md rounded-3xl text-center group transition-colors hover:bg-white/[0.08]"
+            >
+              <div className="mb-4 text-cyan-400 group-hover:scale-110 transition-transform">{stat.icon}</div>
+              <span className="text-[10px] uppercase font-black tracking-[0.2em] text-white/40 group-hover:text-white transition-colors">{stat.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
 
-export default VisionPage;
+export default Vision;
