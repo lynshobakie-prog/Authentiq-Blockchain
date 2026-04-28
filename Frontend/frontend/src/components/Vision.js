@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-// ✅ تأكدي من الاسم الصحيح للملف عندك في المجلد
 import visionVideo from '../assets/videos/vision-bg.mp4.mp4'; 
 import { Eye, Target, ShieldCheck, Award, Zap, Globe } from 'lucide-react';
 
@@ -8,11 +7,9 @@ const Vision = () => {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
 
-  // 1. ✅ كود لضمان تحميل الفيديو مسبقاً وتشغيله فوراً (No Delay)
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.play().catch(error => {
-        // نلتقط الخطأ في حال حظر المتصفح الـ Autoplay
         console.log("Autoplay blocked or video error:", error);
       });
     }
@@ -34,16 +31,15 @@ const Vision = () => {
   return (
     <div ref={containerRef} className="relative w-full bg-[#06080d] text-white overflow-hidden">
       
-      {/* 🎥 Hero Section: الفيديو جاهز (Preloaded) وبوضوح عالي */}
+      {/* Hero Section*/}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0"> 
           <video 
-            ref={videoRef} // ✅ مرجع للفيديو للتحكم به برمجياً
+            ref={videoRef}  
             autoPlay loop muted playsInline 
-            preload="auto" // ✅ تحميل مسبق للفيديو فوراً
+            preload="auto" 
             className="w-full h-full object-cover"
             style={{ 
-                // ✅ الحفاظ على وضوح الفيديو مع إخفاء الحواف السواد
                 transform: 'scale(1.05)', 
                 filter: 'brightness(0.5) contrast(1.1)', 
                 willChange: 'transform',
@@ -57,10 +53,9 @@ const Vision = () => {
         
         <div className="relative z-20 text-center px-4"> 
           <motion.h1 
-            // 2. ✅ انيميشن سريع فورياً (No Delay)
-            initial={{ opacity: 0, y: 15 }} // مسافة صغيرة للوصول أسرع
+            initial={{ opacity: 0, y: 15 }} 
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }} // وقت قصير للتحريك (0.6 بدل 1)
+            transition={{ duration: 0.6, ease: "easeOut" }}  
             className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter leading-tight drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)]"
           >
             Defining <br />
@@ -71,20 +66,19 @@ const Vision = () => {
         </div>
       </section>
 
-      {/* 🧩 Content Section: الحفاظ على شكل الشيفرة والتوهجات (whileInView) */}
+      {/* Content Section*/}
       <section className="relative z-10 py-32 px-6 max-w-6xl mx-auto flex flex-col items-center">
         
-        {/* التوهجات الخلفية القوية والمشبعة (محفوظة) */}
+        {/* التوهجات */}
         <div className="absolute inset-0 pointer-events-none -z-10">
           <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-cyan-500/40 rounded-full blur-[140px] animate-pulse" />
           <div className="absolute bottom-[20%] right-[-10%] w-[500px] h-[500px] bg-emerald-500/40 rounded-full blur-[140px] animate-pulse" />
         </div>
 
-        {/* 1. النص الأول (Intro) - محفوظ بالـ WhileInView */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }} // تضمن ظهور العنصر فوراً بمجرد الرؤية
+          viewport={{ once: true, margin: "-100px" }} 
           transition={{ duration: 0.8 }}
           className="text-center mb-32 max-w-4xl"
         >
@@ -94,7 +88,7 @@ const Vision = () => {
           </p>
         </motion.div>
 
-        {/* 2. الكرتين الكبيرين (شكل الشيفرة الحاد) - محفوظ بالـ Map */}
+        {/* الكرتين الكبيرين */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-40 w-full relative z-10">
           {visions.map((item, index) => (
             <motion.div
@@ -105,7 +99,7 @@ const Vision = () => {
               transition={{ duration: 0.8, delay: index * 0.2 }}
               className="p-12 bg-[#0d111a]/60 border border-white/10 backdrop-blur-3xl group shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
               style={{ 
-                // ✅ شكل الشيفرة المقصوص
+                //  شكل الشيفرة 
                 clipPath: 'polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%)' 
               }}
             >
@@ -118,7 +112,7 @@ const Vision = () => {
           ))}
         </div>
 
-        {/* 3. كروت القيم الصغيرة (محفوظة) */}
+        {/* 3. كروت القيم الصغيرة */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full relative z-10">
           {[
             { label: "Global Trust", icon: <ShieldCheck size={22} /> },
