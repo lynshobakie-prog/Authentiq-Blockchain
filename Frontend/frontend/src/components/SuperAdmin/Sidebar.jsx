@@ -9,7 +9,6 @@ import {
   LogOut 
 } from 'lucide-react';
 
-// مكون فرعي للعناصر داخل القائمة
 const SideItem = ({ icon, label, active, onClick }) => (
     <button 
         onClick={onClick}
