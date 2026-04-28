@@ -7,29 +7,23 @@ const FeatureCard = ({ icon, title, desc }) => (
     whileHover={{ y: -8, scale: 1.01 }}
     className="relative p-6 transition-all duration-500 group"
   >
-    {/* توهج أزرق خلفي ناعم جداً */}
+    {/* توهج أزرق */}
     <div className="absolute inset-0 bg-blue-600/10 blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-    {/* جسم الكرت - تدرج أزرق ملكي (Royal Blue) */}
+    {/*الكرت*/}
     <div 
       className="relative z-10 p-8 h-full overflow-hidden transition-all duration-500 border border-white/5 shadow-2xl"
       style={{ 
-        /* تم ضبط التدرج ليكون أزرق غامق يتجه للأزرق المتوسط (بدون أخضر) */
         backgroundImage: 'linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1d4ed8 100%)',
         clipPath: 'polygon(0 0, 95% 0, 100% 15%, 100% 100%, 5% 100%, 0 85%)',
       }}
     >
-      {/* طبقة زجاجية معتمة خفيفة لإعطاء فخامة */}
       <div className="absolute inset-0 bg-[#06080d]/30 backdrop-blur-md group-hover:bg-transparent transition-all duration-500" />
-
-      {/* لمسة "ضوء" احترافية عند الهوفر */}
       <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/5 to-transparent rotate-45 translate-y-full group-hover:translate-y-[-100%] transition-transform duration-1000 z-10" />
 
       {/* المحتوى */}
       <div className="relative z-20 flex flex-col h-full">
-        {/* بوكس الأيقونة - أبيض شفاف ليتناسب مع الخلفية الزرقاء */}
         <div className="mb-6 inline-flex items-center justify-center w-14 h-14 bg-white/5 border border-white/10 rounded-xl group-hover:bg-blue-500/20 group-hover:border-blue-400/50 transition-all duration-500">
-          {/* تأكدي من أن الأيقونة تأخذ اللون الأبيض لتبرز فوق الأزرق */}
           {React.cloneElement(icon, { size: 26, className: "text-blue-100 group-hover:text-white transition-colors" })}
         </div>
         
@@ -42,7 +36,6 @@ const FeatureCard = ({ icon, title, desc }) => (
         </p>
       </div>
 
-      {/* تفصيل فني (البروتوكول) */}
       <div className="absolute bottom-3 right-5 text-[9px] font-mono text-white/20 uppercase tracking-[0.3em] font-bold">
         Secure AuthQ
       </div>
