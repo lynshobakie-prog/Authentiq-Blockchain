@@ -69,7 +69,7 @@ const AuthModal = ({ authMode, setAuthMode, userRole, adminType, onClose, onSucc
         });
         
         alert("Account created successfully! Please log in.");
-        setAuthMode('login'); // تحويل المستخدم لشاشة الدخول
+        setAuthMode('login'); 
       }
     } catch (error) {
       alert(error.response?.data?.message || "Authentication failed!");
