@@ -33,7 +33,6 @@ const UniversityRow = ({ name, email, status, date, onDeactivate }) => (
     </tr>
 );
 
-// حل الخطأ: أضفنا onStatusChange هنا لتستقبل الدالة من الـ Dashboard
 const UniversitiesTable = ({ universities, searchQuery, onStatusChange }) => {
     const filteredUniversities = (universities || []).filter((uni) => {
         const query = (searchQuery || "").toLowerCase();
@@ -71,7 +70,6 @@ const UniversitiesTable = ({ universities, searchQuery, onStatusChange }) => {
                                     email={uni.email}
                                     status={uni.status} 
                                     date={uni.createdAt} 
-                                    // حل الخطأ: تمرير الدالة للـ Row
                                     onDeactivate={() => onStatusChange(uni._id, uni.status)}
                                 />
                             ))
