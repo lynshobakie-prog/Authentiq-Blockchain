@@ -12,9 +12,7 @@ const UserDashboard = ({ user: propsUser, onLogout, setView }) => {
     console.log("User data present:", user);
 
     const fetchCertificates = async () => {
-      // 2. إذا لم تكن البيانات قد وصلت بعد، لا تحاول الاتصال بالسيرفر
       if (!user || !user.email) {
-        // ننتظر قليلاً ثم نوقف اللودينج إذا لم تتوفر بيانات
         const timer = setTimeout(() => setLoading(false), 2000);
         return () => clearTimeout(timer);
       }
@@ -42,7 +40,7 @@ const UserDashboard = ({ user: propsUser, onLogout, setView }) => {
   return (
     <div className="w-full min-h-screen bg-[#f4f7fa] font-sans text-slate-900">
       
-      {/* 1. Header (يبقى كما هو مع الاسم الديناميكي) */}
+      {/* 1. Header */}
       <div className="relative w-full bg-[#0f172a] border-b border-white/5 overflow-hidden">
         <div className="absolute inset-0 opacity-40 bg-gradient-to-br from-blue-600 via-[#0f172a] to-emerald-500 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-8 pt-32 pb-24 relative z-10">
@@ -100,7 +98,6 @@ const UserDashboard = ({ user: propsUser, onLogout, setView }) => {
               <h2 className="text-xl font-black text-slate-900 uppercase tracking-tight">Verified Certificates</h2>
             </div>
 
-            {/* عرض حالة التحميل أو القائمة */}
             {loading ? (
               <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-dashed border-slate-200">
                 <Loader2 className="animate-spin text-blue-500 mb-4" size={40} />
