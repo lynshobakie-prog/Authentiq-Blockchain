@@ -5,7 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import { updatePassword } from '../../services/api';
 
 const SettingsTab = () => {
-    const { user } = useAuth(); // جلب بيانات المستخدم من الـ Context مباشرة
+    const { user } = useAuth(); // اخذ بيانات المستخدم من الـ Context 
     const [isSaving, setIsSaving] = useState(false);
     
     const [securityData, setSecurityData] = useState({
@@ -20,7 +20,6 @@ const SettingsTab = () => {
     };
 
     const handleSave = async () => {
-    // التحققات (بقيت كما هي)
     if (securityData.newPassword && securityData.newPassword !== securityData.confirmPassword) {
         toast.error("Passwords do not match!");
         return;
@@ -35,21 +34,17 @@ const SettingsTab = () => {
     const loadingToast = toast.loading("Updating password...");
 
     try {
-        // ✅ التغيير الجذري هنا: استخدمي الدالة من ملف الـ API
-        // هذه الدالة ستستخدم تلقائياً الـ Interceptor لإرسال التوكن الصحيح
         const response = await updatePassword({
             newPassword: securityData.newPassword,
             email: user?.email
         });
 
-        // axios يضع النتيجة في response.data وليس بحاجة لـ response.ok
         if (response.status === 200) {
             toast.success("Password updated successfully!", { id: loadingToast });
             setSecurityData({ ...securityData, newPassword: '', confirmPassword: '' });
         }
     } catch (error) {
         console.error("Error:", error);
-        // axios يرمي الخطأ هنا تلقائياً إذا كانت الحالة 403 أو 500
         const errorMessage = error.response?.data?.message || "Failed to update password.";
         toast.error(errorMessage, { id: loadingToast });
     } finally {
@@ -97,7 +92,7 @@ const SettingsTab = () => {
                     </div>
                 </div>
 
-                {/* 2. Security (Editable) */}
+                {/* 2. Security */}
                 <div className="bg-white p-8 rounded-3xl border border-slate-200/60 shadow-sm">
                     <div className="flex items-center gap-2.5 mb-6 border-b border-slate-50 pb-4">
                         <Lock size={18} className="text-orange-500" />
