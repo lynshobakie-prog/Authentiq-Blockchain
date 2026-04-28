@@ -37,7 +37,7 @@ const Process = ({ onNext }) => {
       style={{ backgroundColor }}
       className="relative min-h-screen text-white overflow-hidden w-full"
     >
-      {/* 🎥 Hero Section */}
+      {/* Hero Section */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-[#06080d]">
         <div className="absolute inset-0 z-0"> 
           <video 
@@ -60,20 +60,18 @@ const Process = ({ onNext }) => {
         <div className="relative z-20 text-center px-4 mt-16"> 
           <div className="flex flex-col items-center">
             
-            {/* ✅ التصميم الجديد والمعدل لـ How it works */}
+            {/* How it works */}
             <motion.div 
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ duration: 1 }}
-               className="flex items-center gap-x-5 mb-6" // ✅ زدنا المسافات
+               className="flex items-center gap-x-5 mb-6"  
             >
-                {/* خطوط ديكورية جانبية لإعطاء هيبة للعنوان */}
                 <div className="h-[1px] w-12 md:w-20 bg-white/10" />
                 <motion.span 
                   initial={{ opacity: 0, letterSpacing: "0.2em" }}
-                  animate={{ opacity: 1, letterSpacing: "0.6em" }} // ✅ تباعد الحروف (Letter Spacing) أكبر واحترافي
+                  animate={{ opacity: 1, letterSpacing: "0.6em" }} 
                   transition={{ duration: 1.5, ease: "easeOut" }}
-                  // ✅ كبرنا الحجم لـ 2xl ولعبنا باللون الأبيض/70 لإعطاء عمق
                   className="text-white/70 text-base md:text-2xl font-light uppercase tracking-[0.6em]"
                 >
                   How it works
@@ -81,7 +79,7 @@ const Process = ({ onNext }) => {
                 <div className="h-[1px] w-12 md:w-20 bg-white/10" />
             </motion.div>
 
-            {/* العنوان الرئيسي AUTHENTIQ مع حرف الـ Q المستقيم */}
+            {/* العنوان الرئيسي AUTHENTIQ  */}
             <motion.div 
                initial={{ opacity: 0, scale: 0.95 }}
                animate={{ opacity: 1, scale: 1 }}
@@ -93,7 +91,7 @@ const Process = ({ onNext }) => {
                     <span className="not-italic text-transparent bg-clip-text bg-gradient-to-br from-cyan-400 to-emerald-500 ml-1">Q</span>
                 </h1>
                 
-                {/* الشعار: Proof you can trust */}
+                {/* Proof you can trust */}
                 <div className="flex items-center gap-4 mt-6">
                     <div className="h-[1px] w-6 md:w-12 bg-gradient-to-r from-transparent to-white/20" />
                     <motion.span 
@@ -111,9 +109,8 @@ const Process = ({ onNext }) => {
         </div>
       </section>
 
-      {/* 🧩 Content Section */}
+      {/* Content Section */}
       <section className="relative z-10 py-32 px-4 w-full max-w-[100vw]">
-        {/* Glows لفرش الصفحة وتقليل السواد الجانبي */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div className="absolute top-[5%] -left-[10%] w-[1000px] h-[1000px] bg-emerald-600/10 rounded-full blur-[180px]" />
           <div className="absolute bottom-[10%] -right-[10%] w-[1200px] h-[1200px] bg-cyan-600/10 rounded-full blur-[200px]" />
