@@ -32,7 +32,7 @@ const Navbar = ({
           </span>
         </div>
 
-        {/* 2. الروابط المركزية */}
+        {/* 2. الروابط */}
         <div className="hidden md:flex items-center gap-8 text-[14px] font-[900] text-gray-400 uppercase">
           <button onClick={onHomeClick} className="hover:text-white transition-all duration-300 relative group text-gray-400">
             HOME
@@ -71,7 +71,7 @@ const Navbar = ({
           </button>
         </div>
 
-        {/* 3. منطقة أزرار الأكشن (Sign In أو Dashboard) */}
+        {/* 3.(Sign In أو Dashboard) */}
         <div className="hidden md:flex items-center gap-3">
           {isLoggedIn ? (
             <>
