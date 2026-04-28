@@ -12,7 +12,7 @@ const EntityRow = ({ name, type, onApprove, onReject }) => (
                 <p className="text-[10px] text-slate-400 uppercase tracking-widest font-bold">{type}</p>
             </div>
         </div>
-        <div className="flex gap-2"> {/* حاوية للأزرار */}
+        <div className="flex gap-2"> 
             <button 
         onClick={onApprove}
         className="px-4 py-1.5 bg-white text-blue-600 border border-slate-200 rounded-lg text-xs font-bold hover:bg-blue-600 hover:text-white transition-all shadow-sm"
@@ -20,7 +20,7 @@ const EntityRow = ({ name, type, onApprove, onReject }) => (
         Approve
             </button>
 
-    {/* زر الرفض ) */}
+    {/* زر الرفض */}
     <button 
         onClick={onReject}
         className="p-1.5 bg-white text-rose-500 border border-slate-200 rounded-lg hover:bg-rose-500 hover:text-white transition-all shadow-sm"
