@@ -34,11 +34,9 @@ const Categories = ({ onSelect }) => {
           {cats.map((cat) => (
             <button 
               key={cat.id}
-              // ✨ هنا التعديل: عند الضغط، نرسل المعرف (university أو course) للأب (App.js)
               onClick={() => onSelect(cat.id)} 
               className="group relative p-10 rounded-[2.5rem] bg-white/[0.02] border border-white/5 hover:border-white/20 transition-all duration-500 text-left overflow-hidden"
             >
-              {/* أيقونة كبيرة خلفية */}
               <cat.icon className="absolute -right-8 -bottom-8 w-48 h-48 opacity-[0.02] group-hover:opacity-[0.05] transition-opacity" />
               
               <div className={`w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10 group-hover:border-${cat.color}-500/50 transition-colors`}>
