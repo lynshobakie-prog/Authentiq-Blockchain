@@ -36,26 +36,26 @@ const VerifyForm = ({ title, onBack }) => {
 
   return (
     <div className="relative min-h-screen pt-32 pb-20 px-6 flex flex-col items-center justify-start overflow-hidden bg-[#06080d]">
-      {/* 🌌 Background Elements */}
+      {/*  Background Elements */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-[10%] left-[10%] w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
         <div className="absolute top-[40%] right-[10%] w-80 h-80 bg-emerald-600/15 rounded-full blur-[120px]" />
       </div>
 
-      {/* ⬅️ Back Button */}
+      {/*  Back Button */}
       <button onClick={onBack} className="relative z-20 mb-10 group flex items-center gap-3 py-3 px-8 rounded-full bg-white/[0.05] border border-white/10 hover:border-blue-500/50 transition-all shadow-lg">
         <ArrowLeft size={18} className="text-blue-400 group-hover:-translate-x-1 transition-transform" />
         <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/70">Back to Portal</span>
       </button>
 
-      {/* 🛠️ Main Card Container */}
+      {/*  Main Card Container */}
       <div className="relative z-10 w-full max-w-xl">
         <div className="relative bg-[#0a0c12]/90 backdrop-blur-3xl p-10 md:p-14 overflow-hidden shadow-2xl" style={{ clipPath: 'polygon(0 0, 92% 0, 100% 8%, 100% 100%, 8% 100%, 0 92%)' }}>
           
           <div className="relative z-10 font-sans">
             
             {result === 'success' && certData ? (
-              /* --- ✅ SUCCESS STATE --- */
+              /* --- SUCCESS STATE --- */
               <div className="text-center py-6 animate-in fade-in zoom-in duration-500">
                 <div className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 border border-blue-500/30 bg-blue-500/10 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
                   <ShieldCheck className="text-blue-400" size={40} />
@@ -96,7 +96,7 @@ const VerifyForm = ({ title, onBack }) => {
               </div>
 
             ) : isVerifying ? (
-              /* --- ⚙️ PROCESSING STATE --- */
+              /* --- PROCESSING STATE --- */
               <div className="flex flex-col items-center justify-center py-12 space-y-12">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-full bg-blue-500/20 blur-2xl animate-pulse" />
@@ -113,7 +113,7 @@ const VerifyForm = ({ title, onBack }) => {
               </div>
 
             ) : (
-              /* --- 📝 SEARCH FORM STATE --- */
+              /* ---  SEARCH FORM STATE --- */
               <form onSubmit={handleVerify} className="space-y-10">
                 <div className="text-center mb-12">
                   <h2 className="text-3xl md:text-4xl font-bold text-white uppercase tracking-tight italic">
