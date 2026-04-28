@@ -12,24 +12,23 @@ app.use(cors());
 
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
-//  الميدلوير الخاص بالحماية
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1]; // جلب التوكن من "Bearer TOKEN"
-    console.log("الـ Token اللي وصل للسيرفر:", token); // أضيفي هاد السطر
+    const token = authHeader && authHeader.split(' ')[1]; //بجيب التوكن 
+    console.log("الـ Token اللي وصل للسيرفر:", token); 
 
     if (!token) return res.status(401).json({ message: "دخول غير مصرح به: التوكن مفقود" });
 
     jwt.verify(token, JWT_SECRET, (err, user) => {
         if (err) return res.status(403).json({ message: "التوكن غير صالح أو انتهت صلاحيته" });
-        req.user = user; // إضافة بيانات المستخدم للطلب
-        next(); // السماح بالمرور للمسار التالي
+        req.user = user;  
+        next(); 
     });
 };
 
 // --- [1. Auth Routes] ---
 
-// 📝 مسار التسجيل (Signup)
+//(Signup)
 app.post('/api/auth/register', async (req, res) => {
     try {
         const { fullName, email, password, role, adminType } = req.body;
@@ -38,8 +37,8 @@ app.post('/api/auth/register', async (req, res) => {
             fullName,
             email: email.toLowerCase().trim(),
             password, 
-            role: role || 'user', // القيمة الافتراضية مستخدم عادي
-            status: (role === 'admin') ? 'pending' : 'approved', // الأدمن ينتظر موافقة، اليوزر يوافق عليه فوراً
+            role: role || 'user', 
+            status: (role === 'admin') ? 'pending' : 'approved', 
             adminType: adminType
         });
 
@@ -61,7 +60,7 @@ app.post('/api/auth/register', async (req, res) => {
     }
 });
 
-//  مسار تسجيل الدخول (Login) 
+// (Login) 
 app.post('/api/auth/login', async (req, res) => {
     try {
         const { email, password, adminType } = req.body;
@@ -110,7 +109,7 @@ app.post('/api/auth/login', async (req, res) => {
         // إرجاع التوكن مع بيانات المستخدم
         res.status(200).json({ 
             message: "Login successful!",
-            token: token, // ⬅️ إرسال التوكن للـ Frontend لتخزينه
+            token: token, //  إرسال التوكن للـ Frontend لتخزينه
             user: { 
                 id: user._id, 
                 fullName: user.fullName, 
@@ -126,7 +125,7 @@ app.post('/api/auth/login', async (req, res) => {
     }
 });
 
-// 🔄  تحديث كلمة المرور  (يعمل للأدمن والسوبر أدمن)
+//تحديث كلمة المرور  ( للأدمن والسوبر أدمن)
 app.put('/api/admin/update-password', authenticateToken, async (req, res) => {
     try {
         const { email, newPassword } = req.body;
@@ -140,7 +139,7 @@ app.put('/api/admin/update-password', authenticateToken, async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(newPassword, salt);
 
-        // 3. تحديث قاعدة البيانات بناءً على الإيميل
+        // 3. تحديث قاعدة البيانات بناء على الإيميل
         const user = await User.findOneAndUpdate(
             { email: email.toLowerCase().trim() },
             { password: hashedPassword },
@@ -200,7 +199,7 @@ app.get('/api/superadmin/certificates', async (req, res) => {
     }
 });
 
-// توثيق الشهادة (Verify)
+// توثيق الشهادة 
 app.get('/verify', async (req, res) => {
     try {
         const { code } = req.query;
