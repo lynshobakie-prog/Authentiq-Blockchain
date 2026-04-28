@@ -22,11 +22,10 @@ const AdminDashboard = ({ onLogout }) => {
 
     const fetchData = useCallback(async () => {
         try {
-            // 1. جلب الشهادات من السيرفر
+            // 1. اخذ الشهادات من السيرفر
             const response = await axios.get('http://localhost:5000/all-certificates'); 
             setCertificates(response.data);
 
-            // --- (التعديل الأول: القراءة من user بدل adminUser لجعل الاسم ديناميكي) ---
             const savedUser = localStorage.getItem('user');
             if (savedUser) {
                 const parsedUser = JSON.parse(savedUser);
