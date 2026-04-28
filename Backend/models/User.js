@@ -24,7 +24,6 @@ UserSchema.pre('save', async function () {
     if (!this.isModified('password')) return;
     
     try {
-        // 2. توليد السولت وتشفير الباسورد
         const salt = await bcrypt.genSalt(10);
         this.password = await bcrypt.hash(this.password, salt);
         
@@ -33,7 +32,7 @@ UserSchema.pre('save', async function () {
     }
 });
 
-// دالة لمقارنة الباسورد ( في Login)
+// دالة لمقارنة الباسورد في Login
 UserSchema.methods.comparePassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
