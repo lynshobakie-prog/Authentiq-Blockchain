@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: 'http://localhost:5000/api' });
 
-// أضيفي التوكن إذا موجود (اختياري حسب نظامك)
 API.interceptors.request.use((req) => {
     const token = localStorage.getItem('token');
     if (token) req.headers.Authorization = `Bearer ${token}`;
