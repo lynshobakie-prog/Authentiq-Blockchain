@@ -70,7 +70,6 @@ const SuperAdminDashboard = ({ onLogout }) => {
 };
 
     const handleStatusUpdate = async (id, currentStatus) => {
-    // تحديد الحالة الجديدة بناءً على الحالة الحالية
     const newStatus = currentStatus === 'deactivated' ? 'approved' : 'deactivated';
     const actionText = newStatus === 'deactivated' ? 'تعطيل' : 'إعادة تفعيل';
 
@@ -84,7 +83,7 @@ const SuperAdminDashboard = ({ onLogout }) => {
         });
 
         if (response.ok) {
-            // تحديث الواجهة فوراً
+            // تحديث الواجهة 
             setApprovedUniversities(prev => 
                 prev.map(user => user._id === id ? { ...user, status: newStatus } : user)
             );
